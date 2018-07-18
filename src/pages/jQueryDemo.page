@@ -1,0 +1,139 @@
+<apex:page standardStylesheets="false" showHeader="false" sidebar="false">
+    
+    <style>
+        .demotest{
+        color:red;        
+        }
+    </style>
+    <apex:includeScript value="{!$Resource.JqueryFile}"/>     
+    <script>
+    //var jq=$.noConflict();
+    
+    /*    $(document).ready(function(){
+        //alert('Js Loading');
+    });
+*/
+    
+    
+    /*    $(document).ready(function(){
+        $(".pid").click(function(){
+          alert('para is clicked');
+        });
+    });
+*/
+    var count=0;
+    
+    $(document).ready(function(){
+        $("#hidePara").click(function(){
+            $(".myPara").hide();
+        });
+        $("#showPara").click(function(){
+            $(".myPara").show();
+        });
+        
+    });
+    
+    function showCount(){
+        //  $("#para").hide();
+        count++;
+    }
+    function showHTML(){
+        $("#para").html("<b> Button is Clicked "+count+" times");
+        
+        //	    $("#para2").html($("#para").html());
+    }
+    
+    function validate(){
+        if($("#inputVal").val()==""){
+            //$("#err").html("You must enter value");
+            $("#err1").remove();
+            $("#inputVal").after("<p id='err1'> You must enter a value</p>");
+            $("#err1").css("color","red");
+            $("#inputVal").css("border","red 2px solid");
+        }
+        else{
+            $("#err1").remove();	
+            $("#inputVal").css("border","");
+            alert($("#inputVal").val());
+        }
+        
+    }
+    
+    function addToList(){
+        $("#para3").append("Text Added");
+    }
+    
+    function addToPara(){
+        
+        $("ol").append("<li>New Item</li>");
+    }
+    
+    
+    function addCssClass(){
+        $("p").addClass("demotest");
+    }
+    
+    function removeCssClass(){
+        $("p").each(function(index){
+            if($(this).hasClass("demo") || $(this).hasClass("myPara"))
+                $(this).removeClass("demotest");
+        });
+    }
+    
+    function changeColor(){
+    	$("#myPara2").css("color",$("#myColor").val());
+    }
+    </script>
+    <h1>
+        Hello
+    </h1>
+    <p class="myPara">
+        Click here!
+    </p>
+    <button id="hidePara"> Hide Para</button>
+    <button id="showPara"> Show Para</button>
+    
+    <button onClick="showCount()"> Set HTML </button>
+    <button onClick="showHTML()	"> Show HTML</button>
+    
+    <p id="para">
+        
+    </p>
+    
+    <p id="para2">
+        
+    </p>
+    <p id="err">
+        
+    </p>
+    <button onClick="validate()"> Validate </button>
+    
+    <input type="text" id="inputVal" />
+    <p id="para3">
+        <ol>
+            <li>Item1</li>
+            <li>Item2</li>
+    </ol>
+</p>
+<button onClick="addToList()"> Add To List </button>
+<button onClick="addToPara()"> Add To Para </button>
+
+
+<p class="demo">Para4</p>
+<p class="demo">Para5</p>
+<p class="demotest">Para6</p>
+<p class="demo">Para7</p>
+
+<button onClick="addCssClass()"> Apply Css </button>
+<button onClick="removeCssClass()"> Remove Css </button>
+
+
+<p id="myPara2">Paragraph</p>
+<select id="myColor" onChange="changeColor()">
+    <option>--None--</option>
+    <option>Red</option>
+    <option>Green</option>
+    <option>Blue</option>
+</select>
+
+</apex:page>

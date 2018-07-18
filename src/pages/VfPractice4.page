@@ -1,0 +1,90 @@
+<apex:page controller="VfPractice4Controller">
+    <apex:form >
+        <apex:inputText value="{!contactName}" />
+        <apex:commandButton value="Go" action="{!getContactRecords}" reRender="contactList,conDetail" />
+        <apex:actionFunction name="conDetails" action="{!getContactDetails}" reRender="conDetail" />
+        <apex:actionFunction name="editContact" action="{!editContact}" reRender="conDetail">
+            <apex:param name="editContactParam" value="" assignTo="{!selectedTransactionId}" />
+        </apex:actionFunction>
+        
+        <apex:outputPanel id="contactList">
+            <apex:outputPanel rendered="{!contactName!=null}">
+                <apex:selectRadio value="{!selectedConId}" onchange="conDetails()" >
+                    <apex:selectOptions value="{!conList}" />
+                </apex:selectRadio>
+            </apex:outputPanel>
+        </apex:outputPanel>
+        
+        <apex:outputPanel id="conDetail">
+            <apex:outputPanel rendered="{!selectedConId!=null}">
+                <table>
+                    <tr>
+                        <th>Name</th>
+                        <th>Phone</th>
+                        <th>Email</th>
+                        <th>Admission Date</th>
+                    </tr>
+                    
+                    <apex:repeat value="{!conWrapList}" var="wrap">
+                        <tr>
+                            <td><apex:outputField value="{!wrap.con.Name}" /></td>
+                            <td><apex:outputField value="{!wrap.con.Phone}" /></td>
+                            <td><apex:outputField value="{!wrap.custObj.Email__c }" /></td>
+                            <td><apex:outputField value="{!wrap.custObj.Admission_Date__c}" /></td>
+                        </tr>
+                    </apex:repeat>
+                </table>
+                
+                <table>
+                    <tr>
+                        <th>Action</th>
+                        <th>Transaction Type</th>
+                        <th>Amount</th>
+                        <th>Action</th>
+                    </tr>
+                    
+                    <apex:repeat value="{!transactionList}" var="trans">
+                        <tr>
+                            <td><apex:inputCheckbox value="{!isEdit}" onchange="editContact('{!trans.Id}')" /></td>
+                            <td><apex:outputField value="{!trans.Transaction_Type__c}" rendered="{!trans.Id!=selectedTransactionId}" />
+                                <apex:inputField value="{!trans.Transaction_Type__c}" rendered="{!trans.Id==selectedTransactionId}" /></td>
+                            <td><apex:outputField value="{!trans.Amount__c}" rendered="{!trans.Id!=selectedTransactionId}" />
+                                <apex:inputField value="{!trans.Amount__c}" rendered="{!trans.Id==selectedTransactionId}" /></td>
+                            <td><apex:commandButton value="Save" onclick="" action="{!saveAfterEdit}" reRender="conDetail" /></td>
+                        </tr>
+                    </apex:repeat>
+                    
+                    <tr>
+                        <td><apex:commandButton value="Update All" onclick="" action="{!updateTransactions}" reRender="conDetail" /></td>
+                        <td><apex:commandButton value="New Transaction" onclick="" action="{!newTransaction}" reRender="conDetail,newTransactionPanel" /></td>
+                    </tr>
+                </table>
+                
+            </apex:outputPanel>
+        </apex:outputPanel>
+        
+        <apex:outputPanel id="newTransactionPanel">
+            <apex:outputPanel rendered="{!newTrans}">
+                <table>
+                    <tr>
+                        <th>Transaction Type</th>
+                        <th>Amount</th>
+                        <th>Action</th>
+                    </tr>
+                    
+                    <tr>
+                        
+                        <td>
+                            <apex:selectList value="{!selectedtrans}" size="1">
+                                <apex:selectOptions value="{!transPickList}" /> 
+                            </apex:selectList>
+                        </td>
+                        <td><apex:inputText value="{!transAmount}" /></td>
+                        <td><apex:commandButton value="Save" action="{!save}" reRender="conDetail,newTransactionPanel" /></td>
+                    </tr>
+                </table>
+            </apex:outputPanel>
+        </apex:outputPanel>
+        
+    </apex:form>
+</apex:page>

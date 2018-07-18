@@ -1,0 +1,36 @@
+<apex:page controller="vfPractice3Controller">
+    <apex:form >
+        <apex:actionFunction name="showCon" action="{!getContactData}" />
+        <apex:actionFunction name="editCon" action="{!editContact}" reRender="conDetails	">
+            <apex:param name="editConParam" value="" assignTo="{!selectedConId}"  />
+        </apex:actionFunction>
+        
+        <apex:selectList value="{!selectedAccId}" onchange="showCon()" size="1" >
+            <apex:selectOptions value="{!accList}"  />
+        </apex:selectList>
+        <apex:outputPanel rendered="{!selectedAccId!=null}">
+            <apex:outputPanel id="conDetails">
+                <table>
+                    <tr>
+                        <th> Action </th>
+                        <th> First Name </th>
+                        <th> Last Name </th>
+                        <th> Email </th>
+                    </tr>
+                    <apex:repeat value="{!conWrapMap}" var="con">
+                        <tr>
+                            <td><apex:inputCheckbox value="{!conWrapMap[con].isEdit}"  onchange="editCon('{!conWrapMap[con].cont.Id}')" /></td>
+                            <td><apex:inputField value="{!conWrapMap[con].cont.FirstName}" rendered="{!conWrapMap[con].isEdit}" />
+                            <apex:outputField value="{!conWrapMap[con].cont.FirstName}" rendered="{!!conWrapMap[con].isEdit}" /></td>
+                            <td><apex:inputField value="{!conWrapMap[con].cont.LastName}" rendered="{!conWrapMap[con].isEdit}" />
+                            <apex:outputField value="{!conWrapMap[con].cont.LastName}" rendered="{!!conWrapMap[con].isEdit}" /></td>
+                            <td><apex:inputField value="{!conWrapMap[con].student.Email__c}" rendered="{!conWrapMap[con].isEdit}" />
+                            <apex:outputField value="{!conWrapMap[con].student.Email__c}" rendered="{!!conWrapMap[con].isEdit}" /></td>
+                            <td><apex:commandButton value="Save" action="{!save}" rendered="{!conWrapMap[con].isEdit}" reRender="conDetails" /></td>
+                    </tr>
+                    </apex:repeat>
+                </table>
+            </apex:outputPanel>
+        </apex:outputPanel>
+    </apex:form>
+</apex:page>

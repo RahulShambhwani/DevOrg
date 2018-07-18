@@ -1,0 +1,27 @@
+<apex:page Controller="DemoVf6Controller" sidebar="false"  showHeader="false"  >
+    <apex:pageMessages ></apex:pageMessages>
+    <h1>
+        Your Account is created
+    </h1>
+    <apex:form >
+        <table >
+            <tr>
+                <td>Name  </td>
+                <td><apex:inputField value="{!acc.Name}" /></td>
+            </tr>
+    
+            <tr>
+                <td>Rating</td>
+                <td><apex:inputField value="{!acc.Rating}" /></td>
+            </tr>
+            <tr>														<!-- Error because not queried -->
+                <td> Active </td>
+                <td><apex:inputField value="{!acc.Active__c}" /></td>
+            </tr>
+    
+            <apex:commandButton value="Save" action="{!save}" />
+            <apex:commandButton value="Cancel" action="{!cancel}" />
+        </table>
+    </apex:form>
+       
+</apex:page>

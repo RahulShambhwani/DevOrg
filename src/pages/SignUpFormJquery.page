@@ -1,0 +1,362 @@
+<apex:page sidebar="false" standardStylesheets="false" showHeader="false">
+    <head>
+        <apex:stylesheet value="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
+        <apex:stylesheet value="/resources/demos/style.css" />
+  <script src="https://code.jquery.com/jquery-1.12.4.js">
+        </script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js">
+        </script>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
+  </script>  
+    <style>
+    .logo{
+    position:absolute;
+    background-color:blacck;
+    top:0%;
+    left:0%;
+    width:30%;
+    }
+    
+    body{
+    <!--background-image:url("{!$Resource.recruitment2}");-->
+    background-image: url("{!URLFOR($Resource.image_zip2, 'images/Recruitment_image.jpeg')}");
+    background-repeat: no-repeat;
+    background-size: 110%;
+    }    
+        
+	.taskBar{
+    margin:auto;
+    position:absolute;
+    top:18%;
+    left:25%;
+    background-color:rgba(200,200,200,0.6);
+	}
+        
+    .log_sign{
+    word-spacing:16px;
+	height:70px;
+    font-size:30px;
+    text-align:center;
+    background-color:rgba(0,0,0,0.7);
+	}
+
+    button{
+    border-radius: 14px;
+    font-size:15px;
+    background-color:black;
+	spacing: 10px;    
+    padding: 15px 30px;
+    }    
+    
+    #home,#opening,#about,#contact{
+	color:white;
+    }	
+        
+    #sign{
+    background-color:#c2c2c2;
+    }
+        
+    .sign_form{
+    font-size:20px;
+	text-align:center;
+    position:absolute;
+    top:30%;
+    left:25%;
+    width:575px;
+    height:540px;
+    background-color:rgba(255, 255, 255, 0.9);
+    border:0.5mm solid;
+    }
+        
+    #fName,#lName,#gender,#spouse{
+    border-left:1mm solid #DF0000;
+    }
+        
+    #sub,#can{
+    background-color:#C4B8C4;
+    padding:8px 12px;    
+    }
+    #s{
+    display:none;    
+    }
+        
+    label{
+    float:left;
+    width:250px;
+    }
+        
+    input,select{
+	width:200px;
+    height:25px;
+    font-size:12pt;
+    }
+        
+ <!--   #validate{
+    position:absolute;
+    top:42%;
+    left:54%;
+    font-size:15px;
+    color:red;
+    }
+-->
+    #Age_Error{
+	color:red;
+    font-size:14px;
+    position:absolute;
+    left:54%;
+    display:none;
+    }
+
+    #Email_Error{
+	color:red;
+    font-size:14px;
+    position:absolute;
+    left:54%;
+    display:none;
+    }
+        
+    a{
+    text-decoration:none;
+    color:black;
+    }
+        
+</style>
+</head>
+    <body>
+        
+	<!--  <apex:image url="{!$Resource.Recruitment_icon}" width="100%" ></apex:image>-->
+    <div class="logo">       
+        <a href="/apex/apex/Recruitment?core.apexpages.request.devconsole=1"> <apex:image url="{!$Resource.appirio_recruit}" /></a>
+    </div>
+        
+    <br/><div class="log_sign">
+        <br/>
+        <a href="/apex/Login_form?core.apexpages.request.devconsole=1" style="color:white;">Login</a>
+    </div>
+
+        <div class="taskBar">
+    
+   <a href="apex/Recruitment?core.apexpages.request.devconsole=1">
+    <button id="home">
+        <b>Home</b>
+    </button>
+    </a>
+<!--      <a href="/apex/Login_form?core.apexpages.request.devconsole=1">
+        <button id="login">
+        <b> Login </b>
+    </button>
+        </a>
+        <a href="/apex/signup_form?core.apexpages.request.devconsole=1">
+      <button id="sign">
+           <b> Sign up </b>
+    </button>
+        </a>
+-->
+        <a href="/apex/opening?core.apexpages.request.devconsole=1"> 
+    <button id="opening">
+         <b> Current Openings </b>
+    </button>
+        </a>
+        <a href="/apex/about?core.apexpages.request.devconsole=1">
+    <button id="about">
+          <b> About </b>
+    </button>
+        </a>
+        <a href="/apex/contact?core.apexpages.request.devconsole=1">
+    <button id="contact">
+          <b> Contact us </b>
+    </button>
+        </a>
+	</div>
+
+        
+
+        <div class="sign_form"	>
+
+            <form >
+                <br/>
+                <label for="fname">First Name: </label><input type="text" id="fName" /><br/><br/>
+                <label for="mname">Middle Name: </label><input type="text" id="mName" /><br/><br/>
+                <label for="lname">Last Name: </label><input type="text" id="lName" /><br/><br/>
+                <label for="gender">Gender </label><select id="gender">
+                  <option value="none">--None--</option>                
+                  <option value="male">Male</option>
+                  <option value="female">Female</option>
+                </select><br/><br/>
+                <label for="married">Married </label><select id="married">
+                  <option value="none">--None--</option>                
+                  <option value="yes">Yes</option>
+                  <option value="no">No</option>
+                </select><br/><br/>
+                <span id="s"> <label>Spouse Name</label><input type="text" id="spouse" /><br/><br/></span>
+                <label for="dob">DOB</label><input type="text" id="datepicker"/><br/><br/>
+                <label for="email">Email: </label><input type="text" id="email" /><br/>
+                <span id="Email_Error">Please provide valid email</span><br/>
+                <label for="age">Age: </label><input type="text" id="age" /><br/>
+                <span id="Age_Error">Please enter numbers only</span><br/>
+                <label for="mobile">Mobile: </label><input type="text" id="mobile" /><br/><br/>
+
+         <!-- <span id="validate"></span> -->
+                
+                <script>
+					$(document).ready(function(){
+                        var Age_Regex=/^[0-9]+$/;
+                        var Email_Regex= /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+                        //$("#spouse").hide();            	
+               			$("button#sub").click(function(){
+							if(!$.trim($("#fName").val())){
+                           	   	$("#fName").attr("placeholder","Required");
+                           		$("#fName").css("border-color","#DF0000");
+	                        }
+                            else{
+                           	   	$("#fName").attr("placeholder","");
+                           		$("#fName").css("border-color","");
+                            }
+							if(!$.trim($("#lName").val())){
+                           	   	$("#lName").attr("placeholder","Required");
+                           		$("#lName").css("border-color","#DF0000");
+	                        }
+							else{
+                           	   	$("#lName").attr("placeholder","");
+                           		$("#lName").css("border-color","");                                
+                            }
+                            if($("#gender").val()){
+                                //	$("#gender").attr("placeholder","Required");
+                           		$("#gender").css("border-color","#DF0000");
+	                        }
+                            else {
+                                //$("#gender").attr("placeholder","");
+                           		$("#gender").css("border-color","");
+
+                            }
+							if(!$.trim($("#spouse").val())){
+                           	   	$("#spouse").attr("placeholder","Required");
+                           		$("#spouse").css("border-color","#DF0000");
+	                        }
+                            else{
+                           	   	$("#spouse").attr("placeholder","");
+                           		$("#spouse").css("border-color","");
+                            }
+                            
+                            //$("#dob").datepicker();
+
+                            var age_check=$.trim($("#age").val());
+                            if(age_check!=""){
+                                if( !Age_Regex.test(age_check) ){
+                                    $("#Age_Error").css("display","inline");
+                                    $("#Age_Error").css("border-color","#DF0000");
+                                }
+                                else{
+                                    $("#Age_Error").css("display","none");
+                                    $("#Age_Error").css("border-color","");
+                                }
+                            }
+                            else{
+                                $("#Age_Error").css("display","none");
+                                $("#Age_Error").css("border-color","");                            
+                            }
+                            
+                            var get_Email=$.trim($("#email").val());
+                            if(get_Email!=""){
+                                if( !Email_Regex.test(get_Email) ){
+                                    $("#Email_Error").css("display","inline");
+                                    $("#Email_Error").css("border-color","#DF0000");
+                                }
+                                else{
+                                    $("#Email_Error").css("display","none");
+                                    $("#Email_Error").css("border-color","");
+                                }
+                            }
+                            else{
+                                $("#Email_Error").css("display","none");
+                                $("#Email_Error").css("border-color","");                            
+                            }
+                             
+                            
+                        });
+                        
+                        $("#married").change(function(){
+                            
+                            var marriedOrNot=$("#married :selected").text();
+                            var compareStr="Yes";
+                            if(marriedOrNot===compareStr){
+                                //console.log("Inside the If");
+                            	$("#s").css("display","inline");
+                                $("body").css("background-size","130%");
+                                $(".sign_form").css("height","590px");
+                            }
+                            else{
+                                //console.log(marriedOrNot);
+                              	$("#s").css("display","none");
+                                $(".sign_form").css("height","540px");                                
+                                $("body").css("background-size","110%");
+                            }
+                        
+                        });
+                        
+                        $(function() {
+						    $( "#datepicker" ).datepicker();
+						});
+
+                     });
+                </script>
+                
+                <button type="button"  id="sub">
+                    <b>  Submit</b>
+                </button>
+                <button type="button" id="can">
+                    <b>Cancel</b>
+                </button>
+        	</form>
+            
+        </div>
+    </body>
+</apex:page>
+
+<!--
+
+                function signUpValidation(){
+                    var regex= /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+                	var firstName=document.getElementById("fName").value;
+					var lastName=document.getElementById("lName").value;
+					var email=document.getElementById("email").value;                
+                    var userName=document.getElementById("uName").value;
+                    var password=document.getElementById("pass").value;
+                	var confirmPassword=document.getElementById("cPass").value;
+                        if(userName==""){
+                            document.getElementById("uName").style.borderColor="#FF0000";
+                        	document.getElementById("uName").placeholder="Required!";
+                        }
+                        if(password==""){
+                            document.getElementById("pass").style.borderColor="#FF0000";
+                        	document.getElementById("pass").placeholder="Required!";
+                        }
+                        if(confirmPassword==""){
+                            document.getElementById("cPass").style.borderColor="#FF0000";
+                        	document.getElementById("cPass").placeholder="Required!";
+                        }
+                    	else if(password!=confirmPassword){
+                            document.getElementById("cPass").style.borderColor="#DF0000";
+                        	document.getElementById("cPass").placeholder="Password does not match!";                            
+                        }
+    	                if(firstName==""){
+                            document.getElementById("fName").style.borderColor="#FF0000";
+                        	document.getElementById("fName").placeholder="Required!";
+						}
+                    	if(lastName==""){
+                            document.getElementById("lName").style.borderColor="#FF0000";
+                        	document.getElementById("lName").placeholder="Required!";
+						}
+                    	if(email==""){
+                            document.getElementById("email").style.borderColor="#FF0000";
+                        	document.getElementById("email").placeholder="Required!";
+						}
+                    	else if(!(email.match(regex))){
+                            alert("Please enter valid email");
+                            //var validation=document.getElelmentById("email").value;
+                            // validate.innerHTML="Please enter valid email"+"<br/>";
+                        }
+                    
+                 }
+-->

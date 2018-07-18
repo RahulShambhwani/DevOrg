@@ -1,0 +1,91 @@
+<apex:page controller="VfController2Practice">
+    <apex:form >
+    
+        <apex:actionFunction name="getAccounts" action="{!getAccountRecord}" reRender="accountDetail,conDetails" />
+        <apex:actionFunction name="editRecord" action="{!getDataFromWrapper}" reRender="conDetails">
+            <apex:param value="" name="param1" assignTo="{!selectedConId}" />
+        </apex:actionFunction>
+        <apex:selectList value="{!selectedAccId}" size="1" onchange="getAccounts()">
+            <apex:selectOptions value="{!accList}" />
+        </apex:selectList>
+        
+        <apex:outputPanel id="accountDetail">
+            <apex:outputPanel rendered="{!selectedAccId != null}">
+                <br/><br/>            
+                <table border="1">
+                    <tr>
+                    	<th>Name</th>
+                        <th>SLA Expiration Date</th>
+                    </tr>
+                    <tr>
+                    	<td>{!selectedAccount.Name} </td>
+                        <td>{!selectedAccount.SLAExpirationDate__c} </td>
+                    </tr>
+                </table>
+
+                <br/><br/><br/>                
+                <table border="1">
+                    
+                    <tr>
+                        <th>Action</th>
+                        <th>FirstName</th>
+                        <th>LastName</th>
+                        <th>Email</th>
+                    </tr>
+                    
+                    <apex:repeat value="{!conList}" var="con">
+                        <tr>
+                            <td> <apex:inputCheckbox onchange="editRecord('{!con.Id}')" /> </td>
+                            <td>{!con.FirstName}</td>
+                            <td>{!con.LastName}</td>
+                            <td>{!con.Email}</td>
+                        </tr>
+                    </apex:repeat>
+                </table>
+            </apex:outputPanel>
+        </apex:outputPanel>
+    
+        <br/><br/><br/>
+        <apex:outputPanel id="conDetails">
+            <apex:outputPanel rendered="{!selectedConId!=null}">
+                <table>
+                    <tr>
+                        <th>FirstName</th>
+                        <th>LastName</th>
+                        <th>Email</th>
+                    </tr>
+                    <apex:repeat value="{!conWrapperList}" var="wrap">
+                        <tr>
+                            <td>
+                                <apex:inputField value="{!wrap.conRecord.FirstName}" rendered="{!wrap.isEdit}" />
+                                <apex:outputField value="{!wrap.conRecord.FirstName}" rendered="{!!wrap.isEdit}" />
+                            </td>
+                            
+                            <td>
+                                <apex:inputField value="{!wrap.conRecord.LastName}" rendered="{!wrap.isEdit}" />
+                                <apex:outputField value="{!wrap.conRecord.LastName}" rendered="{!!wrap.isEdit}"/>
+                            </td>
+                            
+                            <td>
+                                <apex:inputField value="{!wrap.custObj.Email__c}" rendered="{!wrap.isEdit}" />
+                                <apex:outputField value="{!wrap.custObj.Email__c}" rendered="{!!wrap.isEdit}" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <apex:commandButton value="Save" action="{!save}"  reRender="accountDetail,conDetails" />
+                            </td>
+                        </tr>
+                    </apex:repeat>
+                </table>
+            </apex:outputPanel>
+        </apex:outputPanel>
+
+        <apex:outputPanel >
+            <apex:outputPanel rendered="{!selectedAccId!=null}">
+                
+            </apex:outputPanel>
+        </apex:outputPanel>
+
+    </apex:form>
+</apex:page>

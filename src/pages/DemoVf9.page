@@ -1,0 +1,105 @@
+<apex:page controller="DemoVf9Controller">
+	<apex:pageMessages id="err"></apex:pageMessages>
+	
+    <apex:form >
+        <apex:actionFunction name="displayData" action="{!displayAccountdata}" reRender="detail,err,wrapId" />
+        <apex:actionFunction name="getContactRecord" action="{!getCon}" reRender="detail2" >
+        	<apex:param name="param1" value="" assignTo="{!selectedContactId}" />
+        </apex:actionFunction>
+        <apex:actionFunction name="editRecord" action="{!updateRecord}" reRender="wrpaId" >
+            <apex:param name="contactToBeEditParam" value="" assignTo="{!editContactId}" />
+        </apex:actionFunction>
+        
+        <apex:selectList value="{!selectedId}" size="1" onchange="displayData()">
+            <apex:selectOptions value="{!accList}" />
+        </apex:selectList>
+        
+		<apex:outputPanel id="detail">        
+            <apex:outputPanel rendered="{!selectedId!=null}">
+                <table border="1">
+                    <tr><td>Name</td>
+                    <td>{!selectedAccount.Name}</td>
+                    </tr>
+                    <tr><td>Owner Name</td>
+                    <td>{!selectedAccount.Owner.Name}</td>
+                    </tr>
+                    </table>
+				<br/><br/><br/>
+                <table border="1">
+                    <tr>
+                        <th>Action</th>
+                        <th>Contact Name</th>
+                        <th>Contact Email</th>
+                      
+                    </tr> 
+                
+                    <apex:repeat value="{!conList}" var="con2">
+ 
+                        <tr>
+                            <td><a href="javascript:void(0)" onClick="getContactRecord('{!con2.Id}')">Edit</a></td>
+                            <td>{!con2.Name}</td>
+                            <td>{!con2.Email}</td>
+                        </tr>
+                    </apex:repeat>
+                </table>
+            </apex:outputPanel>
+        </apex:outputPanel>
+        
+        
+        <!-- Second Output panel of Contacts to edit & save -->
+        <apex:outputPanel id="detail2" >
+            <apex:outputPanel rendered="{!selectedContactId!=null}" >
+				<table>
+    	            <tr>
+                        <th>First Name</th> 
+                        <td><apex:inputField value="{!selectedContact.FirstName}" /></td> 
+                    </tr>
+                    <tr>
+                        <th>Last Name :</th>
+                        <td><apex:inputField value="{!selectedContact.LastName}" /></td> 
+            	    </tr>
+                    <tr>
+                    	<td><apex:commandButton value="Save" action="{!save}" reRender="detail2,detail" /></td>
+                    </tr>
+            	</table>        
+            </apex:outputPanel>
+        </apex:outputPanel>
+        
+        <apex:outputPanel id="wrapId" >
+            <apex:outputPanel rendered="{!conWrapperList.size > 0}" >
+				<table>
+    	            <tr>
+                        <th>Action</th> 
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Date</th>
+                    </tr>
+                        
+					<apex:repeat value="{!conWrapperList}" var="wrap">
+                        <tr>
+                            <td>
+                                <apex:inputCheckbox value="{!wrap.isEdit}" onchange="editRecord()" />
+                            </td>  
+                            <td>
+                                <apex:outputField value="{!wrap.conRecord.Name}" rendered="{!!wrap.isEdit}" />
+                                <apex:inputField value="{!wrap.conRecord.FirstName}" rendered="{!wrap.isEdit}" />
+                                <apex:inputField value="{!wrap.conRecord.LastName}" rendered="{!wrap.isEdit}" />
+                            </td>
+                            <td>
+                                <apex:outputField value="{!wrap.conRecord.Email}" rendered="{!!wrap.isEdit}" />
+                                <apex:inputField value="{!wrap.conRecord.Email}" rendered="{!wrap.isEdit}" />
+                            </td>
+                            <td>
+                            	<apex:outputField value="{!wrap.customObj.Admission_Date__c}" rendered="{!!wrap.isEdit}" />
+                                <apex:inputField value="{!wrap.customObj.Admission_Date__c}" rendered="{!wrap.isEdit}" />
+                            </td>
+                                
+                        </tr>        
+                    </apex:repeat>
+            	</table>        
+            </apex:outputPanel>
+        </apex:outputPanel>
+
+    </apex:form>    
+
+</apex:page>

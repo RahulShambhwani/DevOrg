@@ -1,0 +1,84 @@
+<apex:page controller="VfControllerPractice">
+    <apex:form >
+    
+        <apex:actionFunction name="getAccounts" action="{!getAccountRecord}" reRender="accountDetail,conDetails" />
+        <apex:actionFunction name="editRecord" action="{!getContactRecord}" reRender="conDetails">
+            <apex:param value="" name="param1" assignTo="{!selectedConId}" />
+        </apex:actionFunction>
+        <apex:selectList value="{!selectedAccId}" size="1" onchange="getAccounts()">
+            <apex:selectOptions value="{!accList}" />
+        </apex:selectList>
+        
+        <apex:outputPanel id="accountDetail">
+            <apex:outputPanel rendered="{!selectedAccId != null}">
+                <br/><br/>            
+                <table border="1">
+                    <tr>
+                    	<th>Name</th>
+                        <th>SLA Expiration Date</th>
+                    </tr>
+                    <tr>
+                    	<td>{!selectedAccount.Name} </td>
+                        <td>{!selectedAccount.SLAExpirationDate__c} </td>
+                    </tr>
+                </table>
+
+                <br/><br/><br/>                
+                <table border="1">
+                    
+                    <tr>
+                        <th>Action</th>
+                        <th>FirstName</th>
+                        <th>LastName</th>
+                        <th>Email</th>
+                    </tr>
+                    
+                    <apex:repeat value="{!conList}" var="con">
+                        <tr>
+                            <td> <a href="javascript:void(0)" onClick="editRecord('{!con.Id}')">Edit</a> </td>
+                            <td>{!con.FirstName}</td>
+                            <td>{!con.LastName}</td>
+                            <td>{!con.Email}</td>
+                        </tr>
+                    </apex:repeat>
+                </table>
+            </apex:outputPanel>
+        </apex:outputPanel>
+    
+        <br/><br/><br/>
+        <apex:outputPanel id="conDetails">
+            <apex:outputPanel rendered="{!selectedConId!=null}">
+                <table>
+                    <tr>
+                        <th>FirstName</th>
+                        <td>
+                            <apex:inputField value="{!selectedContact.FirstName}" rendered="{!isEdit}" />
+                            <apex:outputField value="{!selectedContact.FirstName}" rendered="{!!isEdit}" />
+                        </td>
+                    </tr>    
+                    <tr>
+                        <th>LastName</th>
+                        <td>
+                            <apex:inputField value="{!selectedContact.LastName}" rendered="{!isEdit}" />
+                            <apex:outputField value="{!selectedContact.LastName}" rendered="{!!isEdit}"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Email</th>
+                        <td>
+                            <apex:inputField value="{!selectedContact.Email}" rendered="{!isEdit}" />
+                            <apex:outputField value="{!selectedContact.Email}" rendered="{!!isEdit}" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <apex:commandButton value="Save" action="{!save}" rendered="{!isEdit}" reRender="accountDetail,conDetails" />
+                        </td>
+                    </tr>
+                </table>
+            </apex:outputPanel>
+        </apex:outputPanel>
+
+
+    </apex:form>
+</apex:page>

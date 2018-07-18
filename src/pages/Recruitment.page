@@ -1,0 +1,119 @@
+<apex:page standardStylesheets="false" sidebar="false" showHeader="false">
+<style>
+    .logo{
+    position:absolute;
+    background-color:blacck;
+    top:0%;
+    left:0%;
+    width:30%;
+    }
+    
+    body{  
+    background-image: url("{!URLFOR($Resource.image_zip2,'images/Recruitment_image.jpeg')}");
+    background-repeat: no-repeat;
+    background-size: 100%;
+    }    
+	.taskBar{
+    font-color:white;
+    margin:auto;
+    position:absolute;
+    top:18%;
+    left:25%;
+    background-color:rgba(200,200,200,0.6);
+	}
+    
+    button{
+	border-radius: 14px;    
+    font-size:15px;    
+    color:white;
+    background-color:black;
+    color:black;
+	spacing: 10px;    
+    padding: 15px 30px;
+    }
+ 
+    
+    .home_text{
+    position:absolute;
+    top:35%;
+    font-size:30px;
+    height:50%;
+    width:100%;
+    background-color:rgba(212, 213, 196,0.8);
+	}
+    
+    .log_sign{
+    word-spacing:14px;
+	height:70px;
+    font-size:30px;
+    text-align:center;
+    background-color:rgba(0,0,0,0.7);
+    
+	}
+    
+    #opening,#about,#contact{
+    color:white;
+    }
+    #home{
+    background-color:#c2c2c2;
+    }
+    a{
+    text-decoration:none;
+    color:black;
+    }
+    
+</style>
+<body>
+    <div class="logo">       
+        <a href="/apex/apex/Recruitment?core.apexpages.request.devconsole=1"><apex:image url="{!$Resource.appirio_recruit}" /></a>
+    </div>
+    <!--<apex:image url="{!$Resource.Recruitment_icon}" width="100%" />-->
+    <br/><div class="log_sign">
+        <br/>
+        <a href="/apex/Login_form?core.apexpages.request.devconsole=1" style="color:white;">Login</a>
+            <a href="/apex/signup_form?core.apexpages.request.devconsole=1" style="color:white;"> SignUp</a>
+    
+    </div>
+	
+    <div class="taskBar">
+    
+   <a href="apex/Recruitment?core.apexpages.request.devconsole=1">
+    <button id="home">
+        <b>Home</b>
+    </button>
+    </a>
+<!--      <a href="/apex/Login_form?core.apexpages.request.devconsole=1">
+        <button id="login">
+        <b> Login </b>
+    </button>
+        </a>
+        <a href="/apex/signup_form?core.apexpages.request.devconsole=1">
+      <button id="sign">
+           <b> Sign up </b>
+    </button>
+        </a>
+-->
+        <a href="/apex/opening?core.apexpages.request.devconsole=1"> 
+    <button id="opening">
+         <b> Current Openings </b>
+    </button>
+        </a>
+        <a href="/apex/about?core.apexpages.request.devconsole=1">
+    <button id="about">
+          <b> About </b>
+    </button>
+        </a>
+        <a href="/apex/contact?core.apexpages.request.devconsole=1">
+    <button id="contact">
+          <b> Contact us </b>
+    </button>
+        </a>
+	</div>
+    <div class="home_text">
+        <center><h1 >Recruit through us to get better!</h1></center>
+        Our recruitment website and job boards generate better candidate conversion and growth.
+        <br/><br/>No upfront costs, 30-day contracts and a simple monthly fee.
+    </div>
+    
+</body>
+</apex:page>

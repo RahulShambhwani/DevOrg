@@ -1,0 +1,24 @@
+<apex:page standardController="Contact" extensions="VfDemo2Extension" action="{!greet}">
+    <apex:form >
+        <h1>
+            {!message}
+        </h1>
+        <table>
+            <tr>
+            	<td>First Name :</td>
+                <td><apex:inputField value="{!Contact.FirstName}" /></td>
+            </tr>
+            <tr>
+                <td>Last Name :</td>
+                <td><apex:inputField value="{!Contact.LastName}" /></td>
+                
+            </tr>
+            <tr>
+                <td>Account :</td>
+                <td><apex:inputField value="{!Contact.accountId}" /></td>
+            </tr>
+        </table>
+        <apex:commandButton value="Save" action="{!save}" />
+        <apex:commandButton value="Cancel" action="{!cancel}" />
+    </apex:form>
+</apex:page>

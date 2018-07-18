@@ -1,0 +1,11 @@
+<apex:page standardController="Account" extensions="NewPageExtension" action="{!greeting}" renderAs="PDF">
+    <!--	<apex:pageMessages ></apex:pageMessages>	-->
+    <h1>{!message}</h1>
+    <apex:form >
+        Rating <apex:outputField value="{!Account.rating}"  /><br/>  	
+        Name :<apex:outputField value="{!Account.Name}" />  				<!-- To show in PDF Format -->
+        <apex:commandButton value="Save" action="{!save	}" />
+        <apex:commandButton value="CancelMe" action="{!cancelMe}" immediate="true" />
+            
+    </apex:form>
+</apex:page>

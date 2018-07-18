@@ -1,0 +1,79 @@
+<apex:page controller="DemoVF8Controller">
+    <apex:form >
+        <apex:outputPanel rendered="{!displayPanel}">{!message1}</apex:outputPanel>
+        <apex:outputPanel rendered="{!!displayPanel}">{!message2}</apex:outputPanel>
+        <table>
+            <tr>
+                <td><apex:inputField value="{!acc.Name}" rendered="{!isEdit}" styleClass="test" />
+                <apex:outputField value="{!acc.Name}" rendered="{!!isEdit}" /></td>
+                
+            </tr>
+            <tr>
+	        	<td> <apex:commandButton value="Edit" action="{!isEdit}" /> </td>
+                <apex:commandButton value="Save" action="{!save}" rendered="{!isEdit}"	styleClass="test" />
+            </tr>
+        </table>
+            <apex:commandButton value="Show Panel" action="{!showPanel}"  />
+        	
+    
+
+        <apex:pageBlock title="My Title">
+            <apex:pageBlockButtons >
+                <apex:commandButton value="Edit" action="{!isEdit}" />
+                <apex:commandButton value="Save" action="{!save}" />
+            </apex:pageBlockButtons>
+
+            <apex:pageBlockSection >
+                <apex:pageBlockSectionItem >
+                	<apex:outputLabel value="Account Name" /> <apex:inputField value="{!acc.Name}" />
+                </apex:pageBlockSectionItem>
+
+                <apex:pageBlockSectionItem >
+                	<apex:outputLabel value="Rating" /> <apex:inputField value="{!acc.Rating}" />
+                </apex:pageBlockSectionItem>
+                
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+        
+        <apex:pageBlock >
+            <apex:pageBlockTable value="{!conList}" var="con" columns="2">
+                <!-- Iterate through each contact in conList -->
+              <!-- <apex:column value="{!con.FirstName}" />
+                <apex:column value="{!con.LastName}" />  -->
+                
+                <apex:column >
+                    <apex:commandButton value="Edit" action="{!editContact}" rendered="{!!editCon}" />
+                    <apex:commandButton value="save" action="{!saveContact}" rendered="{!editCon}" />
+	                    <apex:facet name="header">
+                         FirstName 
+                    </apex:facet>
+                    <apex:inputField value="{!con.FirstName}" rendered="{!editCon}" />
+                    <apex:outputField value="{!con.FirstName}" rendered="{!!editCon}" />
+                </apex:column>
+                
+                <apex:column >
+                    <apex:facet name="header">
+                        LastName
+                    </apex:facet>
+                    <apex:inputField value="{!con.LastName}" rendered="{!editCon}" /> 
+                    <apex:outputField value="{!con.LastName}" rendered="{!!editCon}" /> 
+                </apex:column>
+
+            </apex:pageBlockTable>
+        </apex:pageBlock>
+            
+            <table>
+                <tr>
+                    <th>FirstName</th>
+                	<th>LastName</th>
+                </tr>
+                <apex:repeat value="{!conList}" var="con">
+                	<tr>
+                        <td>{!con.FirstName}</td>
+                    	<td>{!con.LastName}</td>
+                    </tr>
+                    
+                </apex:repeat>
+            </table>
+    </apex:form>
+</apex:page>

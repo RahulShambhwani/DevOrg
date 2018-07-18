@@ -1,0 +1,206 @@
+<apex:page standardStylesheets="false" sidebar="false" showHeader="false">
+<style>
+    .logo{
+    position:absolute;
+    background-color:blacck;
+    top:0%;
+    left:0%;
+    width:30%;
+    }
+
+    body{
+    background-image: url("{!URLFOR($Resource.image_zip2, 'images/Recruitment_image.jpeg')}");
+    background-repeat: no-repeat;
+    background-size: 100%;
+    }
+    .taskBar{
+    margin:auto;
+    position:absolute;
+    top:18%;
+    left:25%;
+    background-color:rgba(200,200,200,0.6);
+    }
+    .log_sign{
+    word-spacing:16px;
+    height:70px;
+    font-size:30px;
+    text-align:center;
+    background-color:rgba(0,0,0,0.7);
+    }
+    
+    button{
+    border-radius: 14px;
+    font-size:15px;    
+    spacing: 10px;    
+    padding: 15px 30px;
+    background-color:#000;	
+    }
+    
+    #home,#opening,#about,#contact{
+	color:white;
+    }
+    #contact{
+    color:black;
+    background-color:#c2c2c2;
+    }
+    
+	#sub,#can{
+    background-color:#C4B8C4;
+    padding:8px 12px;    
+    }    
+    .contact_sites{
+    position:absolute;
+    top:40%;
+    }
+    
+    .vl {
+    position:absolute;
+    top:40%;
+    left:6%;
+    border-left: 6px solid red;
+    height: 300px;
+    }
+    .contact_form{
+    font-size:20px;
+	text-align:center;
+    position:absolute;
+    top:35%;	
+    left:26%;
+    width:500px;
+    height:410px;
+    background-color:rgba(255, 255, 255, 0.9);
+    border:0.5mm solid;
+    }
+    
+    input,select,textarea{
+	width:200px;
+    height:20px;
+    font-size:12pt;
+    }
+    
+    a{
+    text-decoration:none;
+    color:black;
+    }    
+    
+    #address{
+    border:0.2mm dashed;
+    width:100%;
+    height:10%;
+    font-size:20px;
+    background-color:rgba(255,255,255,0.8);
+    position:absolute;
+    text-align:center;
+    top:110%;
+    }
+        label{
+    float:left;
+    width:200px;
+    }
+ 	#submit{
+     padding:8px 12px;  
+    }
+    
+</style>
+<body>
+    <div class="logo">       
+        <a href="/apex/apex/Recruitment?core.apexpages.request.devconsole=1"><apex:image url="{!$Resource.appirio_recruit}" /></a>
+    </div>
+
+    <br/><div class="log_sign">
+        <br/>
+        <a href="/apex/Login_form?core.apexpages.request.devconsole=1" style="color:white;">Login</a>
+        <a href="/apex/signup_form?core.apexpages.request.devconsole=1" style="color:white;"> SignUp</a>
+    </div>
+    
+    
+   <div class="taskBar">
+     <!--   <apex:image url="{!URLFOR($Resource.image_zip,'images/Recruitment_image.jpg')}" />    -->
+       <a href="apex/Recruitment?core.apexpages.request.devconsole=1">
+        <button id="home">
+            <b>Home</b>
+        </button>
+       </a>
+<!--      <a href="/apex/Login_form?core.apexpages.request.devconsole=1">
+        <button id="login">
+        <b> Login </b>
+    </button>
+        </a>
+        <a href="/apex/signup_form?core.apexpages.request.devconsole=1">
+      <button id="sign">
+           <b> Sign up </b>
+    </button>
+        </a>
+-->
+        <a href="/apex/opening?core.apexpages.request.devconsole=1"> 
+            <button id="opening">
+                 <b> Current Openings </b>
+            </button>
+        </a>
+        <a href="/apex/about?core.apexpages.request.devconsole=1">
+            <button id="about">
+                  <b> About </b>
+            </button>
+        </a>
+        <a href="/apex/contact?core.apexpages.request.devconsole=1">
+            <button id="contact">
+                  <b> Contact us </b>
+            </button>
+        </a>   
+    </div>
+    <div id="address">
+        <b>Address:</b> Fourth Floor, B1 Tower, Mahindra World City, Jaipur, Rajasthan 302037.
+        <br/>
+        @copyright Appirio Cloud Solutions
+    </div>
+    
+    <!--   Form    -->
+    
+    
+    <div class="contact_form">
+
+        <h1 size-text="50%"><i>Contact Form</i></h1>
+  <form>
+
+      <label>First Name</label>
+        <input type="text" id="fname"  />
+          <br/><br/>
+        <label for="lname">Last Name</label>
+        <input type="text" id="lname" name="lastname" />
+          <br/><br/>
+        <label for="country">Country</label>
+        <select id="country" name="country">
+          <option value="australia">Australia</option>
+          <option value="canada">Canada</option>
+          <option value="usa">USA</option>
+        </select>
+          <br/><br/>
+        <label for="subject">Subject</label>
+          <textarea id="subject" name="subject" placeholder="Write something.." style="rows:10;cols=70;resize:none;"  />
+        <br/><br/><br/>
+        <button id="sub">
+            <b>Submit</b>
+        </button>
+        <button id="can">
+            <b>Reset</b>
+        </button>      
+
+   </form>
+</div>
+
+    
+    
+    
+    <!--> Form -->
+    
+    <div class="contact_sites">
+        <br/>
+        <a href="https://www.facebook.com/"><apex:image url="{!URLFOR($Resource.image_zip,'images/facebook_icon.png')}" width="10%" /></a><br/><br/>
+        <a href="https://www.instagram.com/"><apex:image url="{!URLFOR($Resource.image_zip,'images/instagram_icon.png')}" width="10%" /></a><br/><br/>
+        <a href="https://www.reddit.com/"><apex:image url="{!$Resource.reddit_icon2}" width="10%" /><br/></a><br/>
+        <a href="https://www.stumbleupon.com/"><apex:image url="{!URLFOR($Resource.image_zip,'images/StumbleUpon_icon.png')}" width="10%" /></a><br/>
+    </div>
+    <div class="vl"></div>
+    
+</body>
+</apex:page>

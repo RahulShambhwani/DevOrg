@@ -1,0 +1,40 @@
+<apex:page sidebar="false" showHeader="false" standardStylesheets="false">
+    <body>
+        <script>
+        function sort(){
+            var regex= /^[0-9,]+$/;
+            var val=document.getElementById("value").value;
+            var sortedVal=document.getElementById("final").value;
+             if(Number.isNaN(val) || (!val.match(regex))){
+               alert("Please Enter numbers");
+               
+            }
+            else{
+                var values=val.split(",");;
+                //console.log(values);
+                for(var i=0;i<values.length;i++){
+                    for(j=0;j<values.length;j++){
+                        if(parseInt(values[j])>parseInt(values[i])){
+                            var temp=values[i];
+                            values[i]=values[j];
+                            values[j]=temp;
+                        }
+                    }
+                }
+                document.getElementById("final").innerHTML="";
+                for(var i=0;i<values.length;i++){
+                    if(values[i]!="")
+	                    document.getElementById("final").innerHTML+=" "+values[i]+"<br/>";
+                 }
+            }
+        }
+        </script>
+        <input type="text" id="value"/>
+        <button type="button" onclick="sort()">
+            Sort
+        </button>
+        <p>
+            Sorted Values:<br/><span id="final"></span>
+        </p>
+    </body>
+</apex:page>

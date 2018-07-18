@@ -1,0 +1,86 @@
+<apex:page controller="MyCollegeResultController">
+    
+    <apex:pageMessages id="showError" />
+    
+    <apex:form >
+        
+        <apex:actionFunction name="collegeChanged" action="{!getCollegeTopper}" reRender="collegeTopper,studentListOfSelectedCollege" />
+        <apex:actionFunction name="editMarks" action="{!editMarksOfStudent}" reRender="editStudentMarks">
+            <apex:param name="editMarksParam" value="" assignTo="{!selectedStudentId}" />
+        </apex:actionFunction>
+        
+        <apex:selectList value="{!selectedCollegeId}" onchange="collegeChanged()" size="1">
+            <apex:selectOptions value="{!collegeList}"  />
+        </apex:selectList>
+        
+        <apex:selectList value="{!selectedYear}" size="1"  >
+            <apex:selectOptions value="{!yearList}" />
+        </apex:selectList>
+        
+        
+        <apex:outputPanel id="collegeTopper">
+            <apex:outputPanel rendered="{!selectedCollegeId!=null}">
+                <table>
+                    <tr>
+                        <th>Name</th>
+                        <th>Topper</th>
+                        <th>Average Marks</th>
+                    </tr>
+                    
+                    <tr>
+                        <td><apex:outputField value="{!selectedCollege.Name}" /></td>
+                        <td><apex:outputText value="{!topper}" /></td>
+                        <td><apex:outputText value="{!averageMarks}" /></td>
+                    </tr>
+                    
+                </table>
+            </apex:outputPanel>
+        </apex:outputPanel>
+        
+        <br/><br/><br/>
+        <apex:outputPanel id="studentListOfSelectedCollege">
+            <apex:outputPanel rendered="{!selectedCollegeId!=null}">
+                <table>
+                    <tr>
+                        <th>Action</th>
+                        <th>Name</th>
+                        <th>Marks</th>
+                        <th>Date</th>
+                    </tr>
+                    
+                    <apex:repeat value="{!studentList}" var="st">
+                        <tr>
+                            <!-- Only when current user = college owner -->
+                            <td>
+                                <apex:outputLink value="#" onclick="editMarks('{!st.Id}')" rendered="{!selectedCollege.College_Owner__c==userId}" >
+                                    Edit
+                                </apex:outputLink>
+                            </td>
+                            <td><apex:outputField value="{!st.Name}" /></td>
+                            <td><apex:outputText value="{!st.Marks__c}" /></td>
+                            <td><apex:outputText value="{!st.Admission_Date__c}" /></td>
+                        </tr>
+                    </apex:repeat>
+                </table>
+            </apex:outputPanel>
+        </apex:outputPanel>
+        
+        
+        <br/><br/><br/>
+        
+        <apex:outputPanel id="editStudentMarks">
+            <apex:outputPanel rendered="{!selectedStudentId!=null}">
+                <table>
+                    <tr>
+                        <th><apex:outputField value="{!selectedStudent.Name}" rendered="{!!isEdit}" /></th>
+                        <th><apex:inputField value="{!selectedStudent.Marks__c}" rendered="{!!isEdit}" /></th>
+                        <th><apex:outputField value="{!selectedStudent.Admission_Date__c}" rendered="{!!isEdit}" /></th>
+                        <td><apex:commandButton value="Save" action="{!save}" rendered="{!!isEdit}"
+                                                reRender="collegeTopper,studentListOfSelectedCollege,editStudentMarks,showError"/></td>
+                    </tr>
+                </table>
+            </apex:outputPanel>
+        </apex:outputPanel>
+        
+    </apex:form>
+</apex:page>

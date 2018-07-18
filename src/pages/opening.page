@@ -1,0 +1,126 @@
+<apex:page standardStylesheets="false" sidebar="false" showHeader="false">
+<style>
+    .logo{
+    position:absolute;
+    background-color:blacck;
+    top:0%;
+    left:0%;
+    width:30%;
+    }
+
+    body{
+    background-image: url("{!URLFOR($Resource.image_zip2, 'images/Recruitment_image.jpeg')}");
+    background-repeat: no-repeat;
+    background-size: 100%;
+    }   
+	.taskBar{
+    margin:auto;
+    position:absolute;
+    top:18%;
+    left:25%;
+    background-color:rgba(200,200,200,0.6);
+	}
+    .log_sign{
+    word-spacing:16px;
+	height:70px;
+    font-size:30px;
+    text-align:center;
+    background-color:rgba(0,0,0,0.7);
+	}
+	button{
+    border-radius: 14px;
+    font-size:15px;    
+	spacing: 10px;    
+    padding: 15px 30px;
+	background-color:#000;    
+    }
+    
+    #home,#opening,#about,#contact{
+	color:white
+    }
+    #opening{
+    color:black;
+    background-color:#c2c2c2;
+    }
+    
+    a{
+    text-decoration:none;
+    color:black;
+    }
+    
+    .jobs{
+    border:0.5mm dashed ;
+    text-align:center;
+    font-size:22px;
+    width:500px;	
+    position:absolute;
+    top:33%;
+    left:27%;
+    color:#FFF;
+	background-color:rgba(0,0,0,0.8);
+    }
+</style>
+<body>
+<!--  <apex:image url="{!$Resource.Recruitment_icon}" width="100%"></apex:image>-->
+    <div class="logo">       
+        <a href="/apex/apex/Recruitment?core.apexpages.request.devconsole=1"><apex:image url="{!$Resource.appirio_recruit}" /></a>
+    </div>
+    
+    <br/><div class="log_sign">
+        <br/>
+        <a href="/apex/Login_form?core.apexpages.request.devconsole=1" style="color:white">Login</a>
+        <a href="/apex/signup_form?core.apexpages.request.devconsole=1" style="color:white"> SignUp</a>
+    </div>
+    
+    <div class="taskBar">
+    
+   <a href="apex/Recruitment?core.apexpages.request.devconsole=1">
+    <button id="home">
+        <b>Home</b>
+    </button>
+    </a>
+<!--      <a href="/apex/Login_form?core.apexpages.request.devconsole=1">
+        <button id="login">
+        <b> Login </b>
+    </button>
+        </a>
+        <a href="/apex/signup_form?core.apexpages.request.devconsole=1">
+      <button id="sign">
+           <b> Sign up </b>
+    </button>
+        </a>
+-->
+        <a href="/apex/opening?core.apexpages.request.devconsole=1"> 
+    <button id="opening">
+         <b> Current Openings </b>
+    </button>
+        </a>
+        <a href="/apex/about?core.apexpages.request.devconsole=1">
+    <button id="about">
+          <b> About </b>
+    </button>
+        </a>
+        <a href="/apex/contact?core.apexpages.request.devconsole=1">
+    <button id="contact">
+          <b> Contact us </b>
+    </button>
+        </a>
+	</div>
+    
+    <div class="jobs">
+        <br/>
+            Salesforce Ascend Intern<br/>
+            Jaipur, India
+        <br/><br/><hr/>
+        
+            Technical Lead<br/>
+            Indianapolis, USA
+        <br/><br/><hr/>
+		
+            Business Analyst<br/>
+            Tokyo, Japan
+        <br/><br/>
+    </div>
+
+</body>
+</apex:page>

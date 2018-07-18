@@ -1,0 +1,16 @@
+<apex:page controller="DemoVf6Controller">
+    <apex:form >
+        <table>
+            <tr>
+                <td> Name </td>
+                <td> <apex:inputField value="{!acc.Name}" /></td>
+            </tr>
+            <tr>
+                <td> Rating</td>
+                <td> <apex:inputField value="{!acc.Rating}" /></td>
+            </tr>
+        </table>
+    <apex:commandButton value="Save" action="{!save}" />
+        <apex:commandButton value="Cancel" action="{!cancel}" />
+    </apex:form>
+</apex:page>

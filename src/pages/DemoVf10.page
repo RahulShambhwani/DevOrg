@@ -1,0 +1,5 @@
+<apex:page controller="Demovf10Controller">
+    <apex:repeat value="{!accList}" var="acc">
+    	{!acc.Id} + {!acc.Name} + {!acc.Active__c} + {!acc.Type}
+    </apex:repeat>
+</apex:page>
