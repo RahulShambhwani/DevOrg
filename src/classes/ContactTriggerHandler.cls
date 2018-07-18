@@ -207,6 +207,7 @@ public class ContactTriggerHandler {
                           FROM Account
                           WHERE Id IN :accUpdateNameMap.keySet()]){
                               acc.Contact_Name__c=accUpdateNameMap.get(acc.Id);
+                              acc.NumberOfConUpdated__c=conList.size();
                               accUpdatedList.add(acc);
                           }
         if(accUpdatedList.size()>0)

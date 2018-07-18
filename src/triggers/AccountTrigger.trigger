@@ -6,8 +6,7 @@ trigger AccountTrigger on Account (after insert, after update, before delete, af
             a.Id=acc.Id;
             a.SLAExpirationDate__c=Date.today().addDays(90);
             accList.add(a);
-    /*        if(Trigger.isAfter && Trigger.isUpdate){
-                acc.SLAExpirationDate__c=acc.SLAExpirationDate__c.addDays(11);
+    /*        W
             }
     */    }
         If(accList.size()>0)
